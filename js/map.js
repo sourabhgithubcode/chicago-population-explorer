@@ -450,5 +450,3 @@ const MapView = (() => {
 
   return { init, update, setMode, setExaggeration, buildLegend, flyToChicago, flyTo };
 })();
-
-})();
