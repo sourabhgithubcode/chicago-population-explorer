@@ -16,7 +16,9 @@
 
   try {
     // Initialize map first (needs DOM)
-    const mapReady = MapView.init();
+    const mapReady = MapView.init((areaNum, areaName) => {
+      Chart.show(areaNum, areaName);
+    });
 
     // Load population data
     let dataReady;
@@ -30,6 +32,7 @@
     }
 
     await mapReady;
+    await Chart.init();
     loadingEl.remove();
 
   } catch (err) {

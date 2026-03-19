@@ -1,1 +1,1 @@
-const CONFIG = { MAPBOX_TOKEN: '' };
+const CONFIG = { MAPBOX_TOKEN: 'sk.eyJ1Ijoic291cmFiaDIxMjEyMTIxIiwiYSI6ImNtbXd1dHp2aDJ3MHAycXEzeDNsYzM5ajcifQ.0-NwgsJk28Xv1o4BhLBKZA' };

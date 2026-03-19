@@ -1,0 +1,15 @@
+{
+  "city": "Chicago",
+  "model_week": "Typical week \u2014 averaged from full year 2023",
+  "overnight_pop": 2696555,
+  "daytime_peak": 3200000,
+  "transit_sources": "CTA Rail + CTA Bus",
+  "data_sources": [
+    "US Census 2020 (block-level residential population)",
+    "CTA Rail Hourly Ridership - Chicago Data Portal (full year 2023)",
+    "CTA Bus Route Ridership - Chicago Data Portal (full year 2023)",
+    "CTA GTFS (bus stop and rail station locations)",
+    "US Census LEHD OnTheMap (daytime normalization)"
+  ],
+  "methodology": "Block-level overnight populations from US Census 2020. Hourly net inflows/outflows from CTA rail (400m buffer) and CTA bus (150m buffer), each scaled by their respective mode shares (rail 25%, bus 35%). Full year 2023 data with 3-sigma outlier removal and federal holiday exclusion. Normalized to LEHD daytime population estimates."
+}
