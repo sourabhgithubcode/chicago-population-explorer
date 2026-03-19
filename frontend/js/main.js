@@ -114,6 +114,14 @@
     syncTimeDisplay(day, hour);
   });
 
+  // ---- Exaggeration slider ----
+  document.getElementById("exaggeration-slider").addEventListener("input", (e) => {
+    const val = parseFloat(e.target.value);
+    document.getElementById("exaggeration-label").textContent = val + "×";
+    MapView.setExaggeration(val);
+    renderTimeIndex(timeIndex);
+  });
+
   // ---- Mode toggle ----
   document.querySelectorAll(".mode-btn").forEach(btn => {
     btn.addEventListener("click", () => {

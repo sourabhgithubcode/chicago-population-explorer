@@ -45,14 +45,15 @@ const MapView = (() => {
     [10000,  "#b71c1c"]
   ];
 
-  const HEIGHT_SCALE = 0.02;
+  const HEIGHT_SCALE_BASE = 0.15;   // much taller base
+  let   _exaggeration    = 1.0;     // multiplier from slider
 
   // ── Init ────────────────────────────────────────────────────────────────
 
-  // Chicago city limits (tight — excludes suburbs)
-  const CHICAGO_BOUNDS = [
-    [-87.9401, 41.6445],   // SW corner
-    [-87.5240, 42.0230]    // NE corner
+  // Cook County bounds (includes Chicago + immediate ring)
+  const COOK_COUNTY_BOUNDS = [
+    [-88.2635, 41.4690],   // SW corner
+    [-87.5240, 42.1545]    // NE corner
   ];
 
   function init(onAreaClick) {
@@ -63,15 +64,15 @@ const MapView = (() => {
       container:  "map",
       style:      "mapbox://styles/mapbox/dark-v11",
       center:     [-87.6298, 41.8781],
-      zoom:       11,
-      minZoom:    10,       // can't zoom out past city view
-      maxZoom:    16,       // can't zoom in too far
-      pitch:      45,
+      zoom:       10.5,
+      minZoom:    9.5,
+      maxZoom:    16,
+      pitch:      50,
       bearing:    -10,
       antialias:  true,
       maxBounds:  [
-        [-88.0, 41.60],    // SW — slight padding outside city limits
-        [-87.45, 42.08]    // NE — slight padding outside city limits
+        [-88.35, 41.38],   // SW — slight padding outside Cook County
+        [-87.42, 42.23]    // NE — slight padding outside Cook County
       ]
     });
 
@@ -312,7 +313,7 @@ const MapView = (() => {
           change,
           base_pop:   block.base_pop,
           color:      _colorForValue(value, scale),
-          height:     Math.max(0, Math.abs(value) * HEIGHT_SCALE)
+          height:     Math.max(0, Math.abs(value) * HEIGHT_SCALE_BASE * _exaggeration)
         }
       };
     });
@@ -395,7 +396,7 @@ const MapView = (() => {
       const value  = _mode === "absolute" ? pop : change;
       _geojsonCache.features[i].properties.population = pop;
       _geojsonCache.features[i].properties.change     = change;
-      _targetHeights[i] = Math.max(0, Math.abs(value) * HEIGHT_SCALE);
+      _targetHeights[i] = Math.max(0, Math.abs(value) * HEIGHT_SCALE_BASE * _exaggeration);
       _targetColors[i]  = _colorForValue(value, scale);
     }
 
@@ -404,8 +405,14 @@ const MapView = (() => {
 
   function setMode(mode) {
     _mode = mode;
-    // Reset cache so colors rebuild
-    _geojsonCache = null;
+    _geojsonCache   = null;
+    _currentHeights = [];
+    _currentColors  = [];
+  }
+
+  function setExaggeration(val) {
+    _exaggeration   = val;
+    _geojsonCache   = null;
     _currentHeights = [];
     _currentColors  = [];
   }
@@ -432,8 +439,8 @@ const MapView = (() => {
   }
 
   function flyToChicago() {
-    _map.fitBounds(CHICAGO_BOUNDS, {
-      padding: 20, pitch: 45, bearing: -10, duration: 1500
+    _map.fitBounds(COOK_COUNTY_BOUNDS, {
+      padding: 20, pitch: 50, bearing: -10, duration: 1500
     });
   }
 
@@ -441,7 +448,7 @@ const MapView = (() => {
     _map.flyTo({ center:[lng,lat], zoom, duration:1200 });
   }
 
-  return { init, update, setMode, buildLegend, flyToChicago, flyTo };
+  return { init, update, setMode, setExaggeration, buildLegend, flyToChicago, flyTo };
 })();
 
 })();
