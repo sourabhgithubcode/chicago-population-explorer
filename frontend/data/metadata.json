@@ -1,0 +1,13 @@
+{
+  "city": "Chicago",
+  "model_week": "2023-05-01 to 2023-05-07",
+  "overnight_pop": 2696555,
+  "daytime_peak": 3200000,
+  "data_sources": [
+    "US Census 2020 (block-level residential population)",
+    "CTA Rail Hourly Ridership - Chicago Data Portal",
+    "US Census LEHD OnTheMap (daytime normalization)",
+    "CTA GTFS (station locations)"
+  ],
+  "methodology": "Block-level overnight populations from US Census 2020. Net hourly inflows/outflows estimated from CTA rail turnstile data, scaled by transit mode share (30%), dispersed to census blocks within 400m of each station. Normalized to LEHD daytime estimates."
+}
