@@ -49,18 +49,30 @@ const MapView = (() => {
 
   // ── Init ────────────────────────────────────────────────────────────────
 
+  // Chicago city limits (tight — excludes suburbs)
+  const CHICAGO_BOUNDS = [
+    [-87.9401, 41.6445],   // SW corner
+    [-87.5240, 42.0230]    // NE corner
+  ];
+
   function init(onAreaClick) {
     _onAreaClick = onAreaClick;
     mapboxgl.accessToken = CONFIG.MAPBOX_TOKEN;
 
     _map = new mapboxgl.Map({
-      container: "map",
-      style:     "mapbox://styles/mapbox/dark-v11",
-      center:    [-87.6298, 41.8781],
-      zoom:      11,
-      pitch:     45,
-      bearing:   -10,
-      antialias: true
+      container:  "map",
+      style:      "mapbox://styles/mapbox/dark-v11",
+      center:     [-87.6298, 41.8781],
+      zoom:       11,
+      minZoom:    10,       // can't zoom out past city view
+      maxZoom:    16,       // can't zoom in too far
+      pitch:      45,
+      bearing:    -10,
+      antialias:  true,
+      maxBounds:  [
+        [-88.0, 41.60],    // SW — slight padding outside city limits
+        [-87.45, 42.08]    // NE — slight padding outside city limits
+      ]
     });
 
     _map.addControl(new mapboxgl.NavigationControl(), "bottom-right");
@@ -420,8 +432,9 @@ const MapView = (() => {
   }
 
   function flyToChicago() {
-    _map.flyTo({ center:[-87.6298,41.8781], zoom:11, pitch:45,
-                 bearing:-10, duration:1500 });
+    _map.fitBounds(CHICAGO_BOUNDS, {
+      padding: 20, pitch: 45, bearing: -10, duration: 1500
+    });
   }
 
   function flyTo(lng, lat, zoom=13) {
@@ -429,4 +442,6 @@ const MapView = (() => {
   }
 
   return { init, update, setMode, buildLegend, flyToChicago, flyTo };
+})();
+
 })();
