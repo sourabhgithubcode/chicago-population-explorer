@@ -83,12 +83,39 @@ def assign_to_blocks(blocks, points_gdf, radius_m):
 
 # ── Population model ──────────────────────────────────────────────────────
 
+def hourly_target(day, hour):
+    """
+    Return the expected total city population for a given day/hour.
+    Weekday daytime peaks at ~3.2M (LEHD estimate), overnight ~2.7M.
+    Weekend daytime is moderate (~2.85M).
+    """
+    if day < 5:  # Mon–Fri
+        if 7 <= hour <= 19:
+            # Bell curve peaking at noon
+            t = 1.0 - abs(hour - 13) / 6.0
+            t = max(0.0, t)
+            return OVERNIGHT_POPULATION + t * (DAYTIME_PEAK - OVERNIGHT_POPULATION)
+        elif 5 <= hour < 7 or 19 < hour <= 22:
+            return OVERNIGHT_POPULATION + 100_000
+        else:
+            return OVERNIGHT_POPULATION
+    else:  # Sat–Sun
+        if 10 <= hour <= 20:
+            t = 1.0 - abs(hour - 15) / 5.0
+            t = max(0.0, t)
+            return OVERNIGHT_POPULATION + t * 200_000
+        else:
+            return OVERNIGHT_POPULATION
+
+
 def build_hourly_population(blocks, rail_flows, rail_map,
                              bus_flows, bus_map):
     print("Building hourly population estimates (rail + bus)...")
 
-    base_pop   = blocks["population"].values.astype(float)
-    scale      = OVERNIGHT_POPULATION / max(base_pop.sum(), 1)
+    base_pop  = blocks["population"].values.astype(float)
+    # Scale raw Census block pops so they sum to OVERNIGHT_POPULATION
+    census_scale = OVERNIGHT_POPULATION / max(base_pop.sum(), 1)
+    base_pop     = base_pop * census_scale
 
     results = {}
 
@@ -127,8 +154,14 @@ def build_hourly_population(blocks, rail_flows, rail_map,
                     for idx in indices:
                         pop[idx] = max(0, pop[idx] + per_blk)
 
-            # Normalize to Census overnight baseline
-            pop = pop * scale
+            # ── Time-varying normalization ──────────────────
+            # Scale so the city total matches the expected population
+            # for this specific day/hour (higher during daytime).
+            target     = hourly_target(day, hour)
+            cur_total  = pop.sum()
+            if cur_total > 0:
+                pop = pop * (target / cur_total)
+
             results[day][hour] = np.round(pop).astype(int).tolist()
 
         print(f"  Day {day} done", end="\r")
