@@ -32,15 +32,29 @@
 
       <!-- Time controls -->
       <div id="time-controls">
-        <div id="time-display">
-          <span id="day-label">Monday</span>
+
+        <!-- Day tabs -->
+        <div id="day-tabs">
+          <button class="day-tab active" data-day="0">Mon</button>
+          <button class="day-tab" data-day="1">Tue</button>
+          <button class="day-tab" data-day="2">Wed</button>
+          <button class="day-tab" data-day="3">Thu</button>
+          <button class="day-tab" data-day="4">Fri</button>
+          <button class="day-tab weekend" data-day="5">Sat</button>
+          <button class="day-tab weekend" data-day="6">Sun</button>
+        </div>
+
+        <!-- Hour slider -->
+        <div id="hour-row">
+          <span class="hour-bound">12a</span>
+          <input type="range" id="hour-slider" min="0" max="23" value="0" step="1" />
+          <span class="hour-bound">11p</span>
           <span id="hour-label">12:00 AM</span>
         </div>
-        <div id="slider-row">
+
+        <!-- Controls row -->
+        <div id="controls-row">
           <button id="btn-play" title="Play/Pause">&#9654;</button>
-          <input type="range" id="time-slider" min="0" max="167" value="0" step="1" />
-        </div>
-        <div id="speed-row">
           <label>Speed:</label>
           <select id="speed-select">
             <option value="400">0.5x</option>
@@ -48,12 +62,13 @@
             <option value="100">2x</option>
             <option value="50">4x</option>
           </select>
-          <label style="margin-left:12px">Height:</label>
+          <span class="ctrl-divider"></span>
+          <label>Height:</label>
           <input type="range" id="exaggeration-slider"
-                 min="0.5" max="8" step="0.5" value="1"
-                 style="width:80px" />
-          <span id="exaggeration-label">1×</span>
+                 min="1" max="10" step="0.5" value="3" />
+          <span id="exaggeration-label">3×</span>
         </div>
+
       </div>
 
       <!-- Legend -->

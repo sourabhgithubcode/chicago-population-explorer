@@ -45,8 +45,8 @@ const MapView = (() => {
     [10000,  "#b71c1c"]
   ];
 
-  const HEIGHT_SCALE_BASE = 0.15;   // much taller base
-  let   _exaggeration    = 1.0;     // multiplier from slider
+  const HEIGHT_SCALE_BASE = 0.40;   // tall base — visible at Cook County zoom
+  let   _exaggeration    = 3.0;     // default 3× — slider starts here
 
   // ── Init ────────────────────────────────────────────────────────────────
 

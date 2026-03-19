@@ -1,10 +1,9 @@
 /**
- * main.js — Application entry point, wires everything together
+ * main.js — Application entry point
  */
 
 (async () => {
 
-  // Show loading state
   const loadingEl = document.createElement("div");
   loadingEl.id = "loading-overlay";
   loadingEl.innerHTML = `
@@ -15,20 +14,14 @@
   document.body.appendChild(loadingEl);
 
   try {
-    // Initialize map first (needs DOM)
     const mapReady = MapView.init((areaNum, areaName) => {
       Chart.show(areaNum, areaName);
     });
 
-    // Load population data
-    let dataReady;
     try {
-      dataReady = AppData.load();
-      await dataReady;
+      await AppData.load();
     } catch (e) {
-      // Data not yet generated — show demo mode with empty map
-      console.warn("Population data not found. Run pipeline/fetch_census.py, fetch_cta.py, process.py");
-      document.getElementById("stats-total").textContent = "Run pipeline";
+      console.warn("Population data not found. Run the pipeline first.");
     }
 
     await mapReady;
@@ -45,27 +38,26 @@
     return;
   }
 
-  // ---- State ----
-  let timeIndex  = 0;   // 0–167
-  let isPlaying  = false;
-  let playTimer  = null;
-  let mode       = "absolute";
+  // ── State ──────────────────────────────────────────────────────────────
+  let currentDay  = 0;
+  let currentHour = 0;
+  let isPlaying   = false;
+  let playTimer   = null;
+  let mode        = "absolute";
 
-  const blocks   = AppData.getBlocks();
+  const blocks = AppData.getBlocks();
 
-  // ---- Initial render ----
+  // ── Initial render ─────────────────────────────────────────────────────
+  MapView.setExaggeration(3.0);
   MapView.buildLegend(mode);
-  renderTimeIndex(0);
+  render(0, 0);
 
-  // ---- Story ----
+  // ── Story ──────────────────────────────────────────────────────────────
   Story.init(({ day, hour }) => {
-    const index = day * 24 + hour;
-    setTimeIndex(index);
-    syncSlider(index);
-    syncTimeDisplay(day, hour);
+    setDayHour(day, hour);
   });
 
-  // ---- Tab switching ----
+  // ── Nav tabs ───────────────────────────────────────────────────────────
   document.querySelectorAll(".tab").forEach(btn => {
     btn.addEventListener("click", () => {
       document.querySelectorAll(".tab").forEach(t => t.classList.remove("active"));
@@ -76,53 +68,50 @@
     });
   });
 
-  // ---- Play / Pause ----
+  // ── Day tabs ───────────────────────────────────────────────────────────
+  document.querySelectorAll(".day-tab").forEach(btn => {
+    btn.addEventListener("click", () => {
+      setDayHour(parseInt(btn.dataset.day), currentHour);
+    });
+  });
+
+  // ── Hour slider ────────────────────────────────────────────────────────
+  document.getElementById("hour-slider").addEventListener("input", (e) => {
+    setDayHour(currentDay, parseInt(e.target.value));
+  });
+
+  // ── Play / Pause ───────────────────────────────────────────────────────
   document.getElementById("btn-play").addEventListener("click", () => {
     isPlaying = !isPlaying;
     document.getElementById("btn-play").innerHTML = isPlaying ? "&#9646;&#9646;" : "&#9654;";
-    if (isPlaying) startPlayback();
-    else stopPlayback();
+    isPlaying ? startPlayback() : stopPlayback();
   });
 
   function startPlayback() {
     const speed = Number(document.getElementById("speed-select").value);
     playTimer = setInterval(() => {
-      timeIndex = (timeIndex + 1) % 168;
-      syncSlider(timeIndex);
-      const { day, hour } = AppData.timeIndexToDayHour(timeIndex);
-      renderTimeIndex(timeIndex);
-      syncTimeDisplay(day, hour);
+      let h = currentHour + 1;
+      let d = currentDay;
+      if (h > 23) { h = 0; d = (d + 1) % 7; }
+      setDayHour(d, h);
     }, speed);
   }
 
-  function stopPlayback() {
-    clearInterval(playTimer);
-  }
+  function stopPlayback() { clearInterval(playTimer); }
 
   document.getElementById("speed-select").addEventListener("change", () => {
-    if (isPlaying) {
-      stopPlayback();
-      startPlayback();
-    }
+    if (isPlaying) { stopPlayback(); startPlayback(); }
   });
 
-  // ---- Slider ----
-  document.getElementById("time-slider").addEventListener("input", (e) => {
-    const idx = Number(e.target.value);
-    setTimeIndex(idx);
-    const { day, hour } = AppData.timeIndexToDayHour(idx);
-    syncTimeDisplay(day, hour);
-  });
-
-  // ---- Exaggeration slider ----
+  // ── Exaggeration slider ────────────────────────────────────────────────
   document.getElementById("exaggeration-slider").addEventListener("input", (e) => {
     const val = parseFloat(e.target.value);
     document.getElementById("exaggeration-label").textContent = val + "×";
     MapView.setExaggeration(val);
-    renderTimeIndex(timeIndex);
+    render(currentDay, currentHour);
   });
 
-  // ---- Mode toggle ----
+  // ── Mode toggle ────────────────────────────────────────────────────────
   document.querySelectorAll(".mode-btn").forEach(btn => {
     btn.addEventListener("click", () => {
       document.querySelectorAll(".mode-btn").forEach(b => b.classList.remove("active"));
@@ -130,34 +119,35 @@
       mode = btn.dataset.mode;
       MapView.setMode(mode);
       MapView.buildLegend(mode);
-      renderTimeIndex(timeIndex);
+      render(currentDay, currentHour);
     });
   });
 
-  // ---- Core render ----
-  function renderTimeIndex(index) {
-    const { day, hour } = AppData.timeIndexToDayHour(index);
+  // ── Core ───────────────────────────────────────────────────────────────
+  function setDayHour(day, hour) {
+    currentDay  = day;
+    currentHour = hour;
+
+    // Sync day tabs
+    document.querySelectorAll(".day-tab").forEach(btn => {
+      btn.classList.toggle("active", parseInt(btn.dataset.day) === day);
+    });
+
+    // Sync hour slider
+    document.getElementById("hour-slider").value = hour;
+    document.getElementById("hour-label").textContent = AppData.formatHour(hour);
+
+    render(day, hour);
+  }
+
+  function render(day, hour) {
     const pops    = AppData.getHourlyPop(day, hour);
     const changes = AppData.getChange(day, hour);
     MapView.update(day, hour, blocks, pops, changes);
-    updateStatsOverlay(day, hour);
+    updateStats(day, hour);
   }
 
-  function setTimeIndex(index) {
-    timeIndex = index;
-    renderTimeIndex(index);
-  }
-
-  function syncSlider(index) {
-    document.getElementById("time-slider").value = index;
-  }
-
-  function syncTimeDisplay(day, hour) {
-    document.getElementById("day-label").textContent  = AppData.DAY_NAMES[day];
-    document.getElementById("hour-label").textContent = AppData.formatHour(hour);
-  }
-
-  function updateStatsOverlay(day, hour) {
+  function updateStats(day, hour) {
     const total    = AppData.getTotalPop(day, hour);
     const baseline = AppData.getTotalPop(0, 3);
     const change   = total - baseline;
@@ -167,12 +157,13 @@
     const totalEl  = document.getElementById("stat-total");
     const changeEl = document.getElementById("stat-change");
 
-    if (totalEl)  totalEl.textContent  = total > 0 ? total.toLocaleString() : "—";
+    if (totalEl)  totalEl.textContent = total > 0 ? total.toLocaleString() : "—";
     if (changeEl) {
       changeEl.textContent = change !== 0
         ? `${sign}${change.toLocaleString()} (${sign}${pct}%)`
         : "Baseline";
-      changeEl.className = "stat-value " + (change > 0 ? "positive" : change < 0 ? "negative" : "");
+      changeEl.className = "stat-value " +
+        (change > 0 ? "positive" : change < 0 ? "negative" : "");
     }
   }
 
