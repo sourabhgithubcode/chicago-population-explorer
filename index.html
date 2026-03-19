@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Chicago Population Explorer</title>
+  <link rel="stylesheet" href="https://api.mapbox.com/mapbox-gl-js/v3.3.0/mapbox-gl.css" />
+  <link rel="stylesheet" href="css/style.css" />
+</head>
+<body>
+
+  <!-- Header -->
+  <header>
+    <div class="header-left">
+      <h1>Chicago Population Explorer</h1>
+      <span class="subtitle">Hour-by-hour population dynamics</span>
+    </div>
+    <nav class="tabs">
+      <button class="tab active" data-tab="story">Story</button>
+      <button class="tab" data-tab="visualization">Visualization</button>
+      <button class="tab" data-tab="statistics">Statistics</button>
+      <button class="tab" data-tab="about">About</button>
+    </nav>
+  </header>
+
+  <!-- Main content -->
+  <main>
+
+    <!-- Map (always visible) -->
+    <div id="map-container">
+      <div id="map"></div>
+
+      <!-- Time controls -->
+      <div id="time-controls">
+        <div id="time-display">
+          <span id="day-label">Monday</span>
+          <span id="hour-label">12:00 AM</span>
+        </div>
+        <div id="slider-row">
+          <button id="btn-play" title="Play/Pause">&#9654;</button>
+          <input type="range" id="time-slider" min="0" max="167" value="0" step="1" />
+        </div>
+        <div id="speed-row">
+          <label>Speed:</label>
+          <select id="speed-select">
+            <option value="400">0.5x</option>
+            <option value="200" selected>1x</option>
+            <option value="100">2x</option>
+            <option value="50">4x</option>
+          </select>
+        </div>
+      </div>
+
+      <!-- Legend -->
+      <div id="legend">
+        <div class="legend-title">Population per block</div>
+        <div class="legend-scale" id="legend-scale"></div>
+        <div class="legend-mode-toggle">
+          <button class="mode-btn active" data-mode="absolute">Residents</button>
+          <button class="mode-btn" data-mode="change">Change</button>
+        </div>
+      </div>
+
+      <!-- Stats overlay -->
+      <div id="stats-overlay">
+        <div class="stat-item">
+          <span class="stat-label">Total Population</span>
+          <span class="stat-value" id="stat-total">—</span>
+        </div>
+        <div class="stat-item">
+          <span class="stat-label">vs. Overnight</span>
+          <span class="stat-value" id="stat-change">—</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- Story panel -->
+    <div id="panel-story" class="side-panel active">
+      <div id="story-content"></div>
+      <div id="story-nav">
+        <button id="btn-prev">&#8592; Prev</button>
+        <span id="story-progress">1 / 8</span>
+        <button id="btn-next">Next &#8594;</button>
+      </div>
+    </div>
+
+    <!-- Visualization panel -->
+    <div id="panel-visualization" class="side-panel">
+      <h2>Explore Chicago</h2>
+      <p>Use the time slider to scrub through the week hour by hour.</p>
+      <p>Toggle between <strong>Residents</strong> (absolute population) and <strong>Change</strong> (vs overnight baseline) using the legend.</p>
+      <div class="tip">Click any block on the map to see its population details.</div>
+    </div>
+
+    <!-- Statistics panel -->
+    <div id="panel-statistics" class="side-panel">
+      <h2>Statistics</h2>
+      <div id="stats-chart-container">
+        <canvas id="stats-chart"></canvas>
+      </div>
+      <div id="neighborhood-breakdown"></div>
+    </div>
+
+    <!-- About panel -->
+    <div id="panel-about" class="side-panel">
+      <h2>About This Project</h2>
+      <p>
+        Chicago Population Explorer models the city's hour-by-hour population
+        distribution across census blocks, revealing how the city's 2.7 million
+        residents mix with over 3 million daytime workers and visitors.
+      </p>
+      <h3>Data Sources</h3>
+      <ul>
+        <li><strong>US Census 2020</strong> — Block-level residential population</li>
+        <li><strong>CTA Rail Hourly Ridership</strong> — Chicago Data Portal (public)</li>
+        <li><strong>US Census LEHD</strong> — Daytime population normalization</li>
+        <li><strong>CTA GTFS</strong> — Station locations</li>
+      </ul>
+      <h3>Methodology</h3>
+      <p>
+        Overnight populations come from the 2020 Census at the block level.
+        Hourly net inflows and outflows are estimated from CTA rail turnstile data,
+        scaled by Chicago's transit mode share (~30%), and dispersed to census blocks
+        within 400 meters of each station. Final estimates are normalized against
+        LEHD daytime population benchmarks.
+      </p>
+      <h3>Tech Stack</h3>
+      <ul>
+        <li>Mapbox GL JS — Map rendering</li>
+        <li>D3.js — Charts and data binding</li>
+        <li>Python + GeoPandas — Data pipeline</li>
+        <li>US Census API + Chicago Data Portal — Source data</li>
+      </ul>
+      <p class="source-link">
+        Source code: <a href="https://github.com/sourabhgithubcode/chicago-population-explorer" target="_blank">GitHub</a>
+      </p>
+    </div>
+
+  </main>
+
+  <!-- Tooltip -->
+  <div id="tooltip" class="hidden"></div>
+
+  <!-- Scripts -->
+  <script src="https://api.mapbox.com/mapbox-gl-js/v3.3.0/mapbox-gl.js"></script>
+  <script src="https://d3js.org/d3.v7.min.js"></script>
+  <script src="config.js"></script>
+  <script src="js/data.js"></script>
+  <script src="js/map.js"></script>
+  <script src="js/story.js"></script>
+  <script src="js/main.js"></script>
+
+</body>
+</html>
