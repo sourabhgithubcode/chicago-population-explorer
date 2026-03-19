@@ -519,6 +519,66 @@ main {
   height: 200px;
 }
 
+/* ---- Story: Contrast Box ---- */
+.contrast-box {
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  padding: 10px 12px;
+  margin: 12px 0;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.contrast-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 12px;
+}
+
+.contrast-label {
+  color: var(--text-muted);
+}
+
+.contrast-value {
+  font-weight: 600;
+  font-size: 11px;
+  padding: 2px 8px;
+  border-radius: 4px;
+}
+
+.contrast-value.high {
+  background: rgba(229, 57, 53, 0.15);
+  color: #ef5350;
+}
+
+.contrast-value.low {
+  background: rgba(13, 71, 161, 0.2);
+  color: #64b5f6;
+}
+
+/* ---- Story: Event Tag ---- */
+.event-tag {
+  display: inline-block;
+  background: rgba(88, 166, 255, 0.1);
+  border: 1px solid rgba(88, 166, 255, 0.4);
+  color: var(--accent);
+  font-size: 11px;
+  font-weight: 600;
+  padding: 3px 10px;
+  border-radius: 20px;
+  margin: 8px 0 10px;
+  letter-spacing: 0.03em;
+}
+
+.event-tag.anomaly {
+  background: rgba(240, 136, 62, 0.1);
+  border-color: rgba(240, 136, 62, 0.4);
+  color: var(--accent-warm);
+}
+
 /* ---- Scrollbar ---- */
 ::-webkit-scrollbar { width: 6px; }
 ::-webkit-scrollbar-track { background: var(--bg-panel); }
