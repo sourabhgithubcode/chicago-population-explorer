@@ -19,10 +19,9 @@ jobs:
 
       - name: Inject Mapbox token
         env:
-          MB_T1: ${{ secrets.MAPBOX_T1 }}
-          MB_T2: ${{ secrets.MAPBOX_T2 }}
+          MB_B64: ${{ secrets.MAPBOX_TOKEN_B64 }}
         run: |
-          echo "const CONFIG = { MAPBOX_TOKEN: '${MB_T1}${MB_T2}' };" \
+          echo "const CONFIG = { MAPBOX_TOKEN: atob('${MB_B64}') };" \
             > frontend/config.js
 
       - name: Deploy to GitHub Pages

@@ -1,6 +1,8 @@
-// Copy this file to config.js and fill in your values
-// config.js is gitignored - NEVER commit config.js
+// Copy this file to config.js and fill in your Mapbox public token
+// config.js is gitignored — NEVER commit it
 
-const CONFIG = {
-  MAPBOX_TOKEN: 'your_mapbox_public_token_here'
-};
+// Option A: plain token (local dev only)
+// const CONFIG = { MAPBOX_TOKEN: 'pk.your_token_here' };
+
+// Option B: base64 encoded (matches deployed format)
+// const CONFIG = { MAPBOX_TOKEN: atob('base64_of_your_token') };
