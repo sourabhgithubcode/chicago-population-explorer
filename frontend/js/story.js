@@ -5,301 +5,380 @@
 const Story = (() => {
 
   const STEPS = [
+
     // ── 1 ──────────────────────────────────────────────────────────────────
     {
-      title: "Chicago: A City in Motion",
+      title: "3 AM. Chicago Exhales.",
       time: { day: 0, hour: 3 },
       content: `
-        <p>It's 3 AM Monday. Chicago is as quiet as it ever gets.</p>
+        <p>It's Monday, 3 AM. Chicago is as still as it ever gets —
+        and what you're looking at right now is history.</p>
         <div class="stat-box">
           <span class="big-num">2.7M</span>
-          <span class="small-label">Overnight residential population (Census 2020)</span>
+          <span class="small-label">Residents — US Census 2020</span>
         </div>
-        <p>Every bar is a census block — height = people. Right now you're looking
-        at Chicago's true residential skeleton: densely packed along the North Side
-        lakefront, thinning toward the South and West Sides.</p>
-        <p>This baseline will <span class="highlight">nearly double</span> by
-        Wednesday noon. Watch what happens.</p>
+        <p>Every bar is a census block. Height is people. The pattern you
+        see — dense along the North Side lakefront, thin across the South
+        and West Sides — wasn't shaped by housing prices or personal choice.
+        It was <span class="highlight">drawn by government policy</span>.</p>
+        <p>In 1940, federal mortgage officials literally colored Chicago's
+        neighborhoods red, yellow, and green on maps. Red meant "hazardous"
+        — meaning Black. Those redlined neighborhoods were denied loans,
+        starved of investment, and left to decline. Eighty years later,
+        the bar heights still echo those maps.</p>
+        <p>This is where Chicago's story begins. Press Next — and watch
+        what happens when the sun comes up.</p>
       `
     },
 
     // ── 2 ──────────────────────────────────────────────────────────────────
     {
-      title: "The North–South Divide at Rest",
+      title: "The Great Migration — Still Visible at 4 AM",
       time: { day: 0, hour: 4 },
       content: `
-        <p>Before the commute begins, the residential inequality of Chicago is
-        starkly visible in the bar heights themselves.</p>
-        <div class="contrast-box">
-          <div class="contrast-item">
-            <span class="contrast-label">Lincoln Park / Lakeview</span>
-            <span class="contrast-value high">Dense</span>
-          </div>
-          <div class="contrast-item">
-            <span class="contrast-label">Englewood / Auburn Gresham</span>
-            <span class="contrast-value low">Sparse</span>
-          </div>
-        </div>
-        <p>The North Side lakefront neighborhoods house 3–4x more people per
-        block than many South Side neighborhoods — a pattern rooted in decades
-        of disinvestment, white flight, and redlining whose effects are still
-        embedded in the 2020 Census data powering this map.</p>
+        <p>Before dawn, the city's demographic history is most readable.
+        Look south of the Loop — that dense corridor running down State
+        Street and King Drive through Bronzeville.</p>
+        <div class="event-tag">Bronzeville — The Black Metropolis</div>
+        <p>Between 1910 and 1970, <span class="highlight">over 500,000
+        Black Americans</span> fled Jim Crow's violence and poverty in
+        the South and arrived in Chicago, most settling on the South Side.
+        They built what Langston Hughes called "the greatest Negro city
+        in the world" — theaters, newspapers, blues clubs, churches,
+        businesses — in a 30-block stretch they couldn't legally leave
+        due to racially restrictive covenants.</p>
+        <p>The census blocks in Bronzeville still show that residential
+        concentration. What they can't show is that this neighborhood was
+        once twice as dense — urban renewal and expressway construction
+        in the 1950s demolished much of it.</p>
+        <p>The <strong style="color:#e6edf3">Dan Ryan Expressway (I-94)</strong>
+        was deliberately routed to create a physical wall between the
+        Black South Side and white neighborhoods to the west. You can
+        trace that wall in the bar heights even now.</p>
       `
     },
 
     // ── 3 ──────────────────────────────────────────────────────────────────
     {
-      title: "Morning Rush — The Loop Ignites",
-      time: { day: 0, hour: 8 },
+      title: "6 AM — The L Wakes Up",
+      time: { day: 0, hour: 6 },
       content: `
-        <p>8 AM Monday. The Red, Blue, Brown, and Green lines flood the Loop
-        with commuters from every corner of the city.</p>
-        <div class="stat-box">
-          <span class="big-num">~500K</span>
-          <span class="small-label">Net inflow to the Loop by 9 AM</span>
+        <p>The first Red Line trains leave Howard and 95th Street.
+        Something no other American city does begins to happen.</p>
+        <div class="contrast-box">
+          <div class="contrast-item">
+            <span class="contrast-label">Howard Station (Rogers Park)</span>
+            <span class="contrast-value low">Losing people</span>
+          </div>
+          <div class="contrast-item">
+            <span class="contrast-label">The Loop</span>
+            <span class="contrast-value high">Gaining fast</span>
+          </div>
         </div>
-        <p>The <span class="highlight">Clark/Lake and Washington/Wells
-        interchange</span> blocks explode — this is where the L lines converge,
-        depositing thousands of workers per hour into the financial and
-        government district.</p>
-        <p>Meanwhile Lakeview, Logan Square, and Pilsen visibly deflate —
-        their residents are on those trains.</p>
+        <p>Chicago's <span class="highlight">elevated train — "the L" —
+        has run continuously since 1892</span>. It built the city outward
+        along its spokes: the Red Line created Rogers Park, the Blue Line
+        created Wicker Park and Pilsen's edge, the Green Line connected
+        Bronzeville. Every neighborhood with an L stop is a neighborhood
+        that grew around it.</p>
+        <p>The Loop's elevated square — where five lines share the same
+        tracks — made Chicago's downtown the most transit-accessible
+        workplace district in America outside Manhattan. Employers built
+        there. Workers flooded in every morning. The daily commute became
+        the city's defining rhythm, and it still is.</p>
       `
     },
 
     // ── 4 ──────────────────────────────────────────────────────────────────
     {
-      title: "The Medical Corridor — A Different Kind of Spike",
-      time: { day: 0, hour: 10 },
+      title: "8 AM — The Most Extreme Commute in America",
+      time: { day: 0, hour: 8 },
       content: `
-        <p>Look at the Near West Side, just west of the Loop. A cluster of
-        blocks that barely moved during the commute suddenly shows sustained
-        high population all day.</p>
-        <div class="event-tag">Illinois Medical District</div>
-        <p>The <span class="highlight">Illinois Medical District</span> — home to
-        Rush University Medical Center, UI Health, and Jesse Brown VA Medical
-        Center — is one of the largest medical districts in the world.
-        Nearly <strong style="color:#e6edf3">40,000 employees and patients</strong>
-        occupy this zone daily, independent of the typical 9-to-5 cycle.</p>
-        <p>Similarly, <strong style="color:#e6edf3">Northwestern Memorial</strong>
-        in Streeterville adds another 16,000+ — watch that block stay red
-        even at 2 AM.</p>
+        <p>By 8 AM, the Loop is doing something no other American downtown
+        does at this scale.</p>
+        <div class="stat-box">
+          <span class="big-num">~8,000</span>
+          <span class="small-label">People who actually <em>live</em> in the Loop</span>
+        </div>
+        <p>Eight thousand residents. Yet by 9 AM on a weekday, the Loop
+        holds over <span class="highlight">500,000 workers and visitors</span> —
+        a <strong style="color:#e6edf3">60x population surge</strong> in
+        three hours. No other neighborhood in Chicago, or in America,
+        flips this completely.</p>
+        <p>What you're watching is the Red, Blue, Brown, Green, Orange,
+        and Pink lines all converging on a single square mile. The
+        <strong style="color:#e6edf3">Clark/Lake interchange</strong>
+        alone — where five lines share one platform — funnels tens of
+        thousands per hour through one block.</p>
+        <p>Residential neighborhoods visibly deflate as you watch.
+        Lakeview, Logan Square, Pilsen, Bridgeport — the trains are
+        taking their residents downtown. The bars shrink in real time.</p>
       `
     },
 
     // ── 5 ──────────────────────────────────────────────────────────────────
     {
-      title: "Wednesday Noon — Peak Chicago",
-      time: { day: 2, hour: 12 },
+      title: "The Invisible Commuters — Pilsen, Chinatown, Bridgeport",
+      time: { day: 0, hour: 9 },
       content: `
-        <p>Wednesday noon is the statistical peak of Chicago's week — the moment
-        when the most people occupy the city simultaneously.</p>
-        <div class="stat-box">
-          <span class="big-num">3.2M</span>
-          <span class="small-label">Estimated total city population at peak</span>
-        </div>
-        <p><span class="highlight">Wednesday, not Monday</span>, is peak day.
-        Monday sees slower ramp-ups — remote workers, late starters, travel
-        returning from weekends. By Wednesday everyone is in.</p>
-        <div class="contrast-box">
-          <div class="contrast-item">
-            <span class="contrast-label">Loop (daytime)</span>
-            <span class="contrast-value high">+500K vs overnight</span>
-          </div>
-          <div class="contrast-item">
-            <span class="contrast-label">Loop (3 AM)</span>
-            <span class="contrast-value low">~8K residents</span>
-          </div>
-        </div>
-        <p>The Loop has almost <span class="highlight">no one living in it</span>.
-        Every bar you see at noon is a worker or visitor — not a resident.</p>
+        <p>Notice anything strange? Some neighborhoods barely change at all
+        between 3 AM and 9 AM, even though their residents clearly go to work.</p>
+        <div class="event-tag anomaly">Model blind spot: Car & bus commuters</div>
+        <p><span class="highlight">Pilsen, Chinatown, and Bridgeport</span>
+        are Chicago's most car-dependent working-class neighborhoods.
+        Their residents commute by car on the I-55 and I-90/94 expressways,
+        or by bus — not by L train. This model is built on CTA rail data,
+        so it literally cannot see their daily departure.</p>
+        <p>This matters: <strong style="color:#e6edf3">Pilsen is one of
+        Chicago's densest neighborhoods</strong>, home to 80,000 mostly
+        Mexican-American residents. When the map shows it barely changing,
+        that's not reality — that's a data gap. The South Side's daily
+        population export is <em>larger</em> than the model shows, just
+        invisible to rail turnstiles.</p>
+        <p>The CTA bus data we added helps, but 40% of Chicago commuters
+        drive. Their story doesn't appear here.</p>
       `
     },
 
     // ── 6 ──────────────────────────────────────────────────────────────────
     {
-      title: "Wrigleyville — The Cubs Anomaly",
-      time: { day: 2, hour: 14 },
+      title: "Wednesday Noon — Peak Chicago",
+      time: { day: 2, hour: 12 },
       content: `
-        <p>In our averaged annual model, Wrigleyville (Lakeview) shows a
-        modest Wednesday afternoon bump. But in reality, this neighborhood
-        hides one of Chicago's biggest recurring anomalies.</p>
-        <div class="event-tag anomaly">Filtered from model: Game Day</div>
-        <p>On <span class="highlight">Cubs home game days</span>, the blocks
-        around Wrigley Field (Addison Red Line) spike by
-        <strong style="color:#e6edf3">~40,000 people</strong> within a
-        2-hour window. The 2023 Cubs played 81 home games — nearly half
-        the season — making this one of Chicago's most frequent
-        population anomalies.</p>
-        <p>Our outlier removal (3σ filter) partially smooths these spikes,
-        but game days are visible as elevated Wrigleyville ridership even
-        in the averaged data.</p>
+        <p>This is it. Wednesday at noon is the statistical maximum —
+        the single hour when more people occupy Chicago simultaneously
+        than any other moment in the typical week.</p>
+        <div class="stat-box">
+          <span class="big-num">3.2M</span>
+          <span class="small-label">Total city population — LEHD daytime estimate</span>
+        </div>
+        <p><span class="highlight">Why Wednesday, not Monday?</span>
+        Remote work changed the calculus. Monday is the most common
+        work-from-home day. Friday afternoon starts early. Tuesday
+        through Thursday are now Chicago's "real" workweek —
+        Wednesday noon is when the most people have actually
+        made it into the office.</p>
+        <p>That extra 500,000 people above overnight baseline are almost
+        entirely concentrated within 2 miles of the Loop. The lakefront
+        and the expressway corridors funnel the region's 9.5 million
+        suburban commuters into this same dense core.</p>
+        <div class="contrast-box">
+          <div class="contrast-item">
+            <span class="contrast-label">Loop: 3 AM residents</span>
+            <span class="contrast-value low">~8,000</span>
+          </div>
+          <div class="contrast-item">
+            <span class="contrast-label">Loop: Wed noon population</span>
+            <span class="contrast-value high">~500,000+</span>
+          </div>
+        </div>
       `
     },
 
     // ── 7 ──────────────────────────────────────────────────────────────────
     {
-      title: "The Evening Reversal",
-      time: { day: 0, hour: 17 },
+      title: "The Medical City — 40,000 Who Don't Follow the Rules",
+      time: { day: 2, hour: 14 },
       content: `
-        <p>5 PM — the city's daily heartbeat reverses direction.</p>
-        <p>The same trains that emptied the neighborhoods this morning now
-        carry those workers home. The Loop's bars collapse in real time
-        while residential corridors refill.</p>
-        <div class="contrast-box">
-          <div class="contrast-item">
-            <span class="contrast-label">Loop at 5 PM</span>
-            <span class="contrast-value low">Draining fast</span>
-          </div>
-          <div class="contrast-item">
-            <span class="contrast-label">Lakeview at 6 PM</span>
-            <span class="contrast-value high">Refilling</span>
-          </div>
-        </div>
-        <p>One anomaly stands out: <span class="highlight">River North and
-        the Streeterville restaurant corridor</span> barely dip at 5 PM —
-        the dinner shift replaces the office crowd almost seamlessly,
-        keeping those blocks elevated through 9 PM.</p>
+        <p>Find the Near West Side, just west of the Loop. See those blocks
+        that stayed elevated all morning, through lunch, and will stay
+        elevated at 2 AM? That's not a commuter pattern. That's
+        something different.</p>
+        <div class="event-tag">Illinois Medical District — World's Largest</div>
+        <p>The <span class="highlight">Illinois Medical District</span> is
+        the largest urban medical district on earth: Rush University Medical
+        Center, University of Illinois Health, Jesse Brown VA, and two dozen
+        smaller facilities — <strong style="color:#e6edf3">40,000 employees
+        and patients</strong> on any given day, operating on 8-hour rotating
+        shifts around the clock.</p>
+        <p>The same pattern appears at <strong style="color:#e6edf3">Northwestern
+        Memorial in Streeterville</strong> (16,000+) and
+        <strong style="color:#e6edf3">University of Chicago Medicine
+        in Hyde Park</strong>. These are population anchors that ignore
+        the commuter tide — they pulse on their own 24-hour rhythm,
+        not the city's 9-to-5.</p>
+        <p>Chicago's hospital complex is also an economic equalizer:
+        it's one of the largest employers of South and West Side residents,
+        connecting neighborhoods that are otherwise cut off from the
+        Loop job market.</p>
       `
     },
 
     // ── 8 ──────────────────────────────────────────────────────────────────
     {
-      title: "Friday — The Early Escape",
-      time: { day: 4, hour: 13 },
+      title: "McCormick Place — The Convention Earthquake",
+      time: { day: 1, hour: 10 },
       content: `
-        <p>Friday 1 PM. Something subtle but consistent appears in the data.</p>
-        <div class="stat-box">
-          <span class="big-num">~12%</span>
-          <span class="small-label">Fewer Loop workers vs Wednesday noon</span>
-        </div>
-        <p>The Loop starts draining <span class="highlight">2–3 hours earlier
-        on Fridays</span> than any other weekday. This is the aggregate
-        fingerprint of flex time, remote Fridays, and early weekend
-        departures — visible at the city scale in CTA exit data.</p>
-        <p>By 3 PM Friday the Loop looks more like a Saturday than a Wednesday.
-        By 6 PM it's nearly silent.</p>
+        <p>Look at the lakefront just south of the Museum Campus —
+        a cluster of blocks near Cermak and Lake Shore Drive.
+        On a normal Tuesday morning, quiet. But on certain weeks,
+        it becomes the most densely occupied non-Loop location in the city.</p>
+        <div class="event-tag anomaly">Filtered: Major conventions (avg 10–15 per month)</div>
+        <p><span class="highlight">McCormick Place is the largest
+        convention center in North America</span> — 2.6 million square feet
+        on the lakefront. When it's running a major show, it generates
+        a private population spike that rivals a Cubs game: 50,000–80,000
+        attendees for events like the Chicago Auto Show, the restaurant
+        industry's NRA Show, or ASCO (the world's largest oncology conference).</p>
+        <p>Our model averages this away — conventions appear as modest
+        elevated ridership in the average. But in the raw data, McCormick
+        weeks create some of the strongest anomalies in the entire dataset,
+        filling hotels from River North to Hyde Park and turning the
+        Green Line into a professional conference shuttle.</p>
+        <p>The convention economy brings <strong style="color:#e6edf3">
+        ~13 million visitors and $7.5B annually</strong> to Chicago —
+        nearly invisible in population models, enormous in reality.</p>
       `
     },
 
     // ── 9 ──────────────────────────────────────────────────────────────────
     {
-      title: "Lollapalooza — Grant Park Transformed",
-      time: { day: 5, hour: 15 },
+      title: "Friday Afternoon — The Work-From-Home Fingerprint",
+      time: { day: 4, hour: 14 },
       content: `
-        <p>Saturday afternoon. Grant Park on a normal weekend is calm.
-        But every August, something extraordinary overwrites this pattern.</p>
-        <div class="event-tag anomaly">Annual anomaly: Lollapalooza (August)</div>
-        <p>Lollapalooza draws <span class="highlight">~100,000 people per day
-        to Grant Park</span> — directly on top of the blocks just east of
-        the Loop. For 4 days straight, those blocks show population densities
-        that rival the Loop at peak commute hour, but on a weekend.</p>
-        <p>Our model averages this away — but in the raw 2023 data, those
-        4 August days were flagged as outliers and removed before averaging,
-        which is exactly correct: they are exceptional, not typical.</p>
+        <p>It's Friday 2 PM. The Loop is already draining — 2 to 3 hours
+        earlier than any other weekday.</p>
+        <div class="stat-box">
+          <span class="big-num">~15%</span>
+          <span class="small-label">Fewer Loop workers vs. Wednesday noon</span>
+        </div>
+        <p>This is the aggregate fingerprint of the post-pandemic work
+        arrangement. Friday is now Chicago's <span class="highlight">
+        lowest downtown-occupancy weekday</span>, driven by three
+        overlapping patterns visible in the CTA data:</p>
+        <ul style="margin:10px 0 10px 16px;color:#8b949e;font-size:13px;line-height:2">
+          <li><strong style="color:#e6edf3">Remote Fridays</strong> — most hybrid workers skip the office</li>
+          <li><strong style="color:#e6edf3">Early weekend departures</strong> — Metra and O'Hare surge by 3 PM</li>
+          <li><strong style="color:#e6edf3">Flex time</strong> — professionals leaving at 1 PM to beat traffic</li>
+        </ul>
+        <p>By 4 PM Friday, the Loop looks more like a Saturday than a Wednesday.
+        It's a structural change — pre-2020 CTA data showed a much more
+        symmetric week. The dip is permanent now.</p>
       `
     },
 
     // ── 10 ─────────────────────────────────────────────────────────────────
     {
-      title: "Saturday Night — Chicago's Real Nightlife Geography",
+      title: "Saturday Night — Six Downtowns",
       time: { day: 5, hour: 22 },
       content: `
-        <p>10 PM Saturday. The Loop is nearly empty. But look where
-        the city's energy has migrated.</p>
+        <p>10 PM Saturday. The Loop is nearly empty. The office buildings
+        are dark. But Chicago's population hasn't gone home — it's
+        redistributed.</p>
         <div class="contrast-box">
           <div class="contrast-item">
             <span class="contrast-label">Wicker Park / Bucktown</span>
+            <span class="contrast-value high">Surging</span>
+          </div>
+          <div class="contrast-item">
+            <span class="contrast-label">River North / Gold Coast</span>
+            <span class="contrast-value high">Surging</span>
+          </div>
+          <div class="contrast-item">
+            <span class="contrast-label">Andersonville / Boystown</span>
             <span class="contrast-value high">Elevated</span>
           </div>
           <div class="contrast-item">
-            <span class="contrast-label">River North</span>
-            <span class="contrast-value high">Elevated</span>
-          </div>
-          <div class="contrast-item">
-            <span class="contrast-label">Hyde Park</span>
+            <span class="contrast-label">Englewood / Auburn Gresham</span>
             <span class="contrast-value low">Quiet</span>
           </div>
         </div>
-        <p>Unlike Manhattan where nightlife concentrates in one mega-zone,
-        Chicago's Saturday night population is <span class="highlight">
-        distributed across 6–8 neighborhood entertainment districts</span> —
-        a reflection of its neighborhood-first urban identity.</p>
-        <p>The South Side stays quiet at night — a persistent contrast
-        that reflects both demographic patterns and the geography of
-        Chicago's entertainment investment.</p>
+        <p>Unlike Manhattan — where nightlife concentration creates a
+        single mega-zone in Midtown and downtown — Chicago's Saturday
+        night energy <span class="highlight">distributes across six to
+        eight neighborhood districts simultaneously</span>. This is
+        what "city of neighborhoods" actually means in population terms.</p>
+        <p>The South Side's quiet isn't just about nightlife investment —
+        it reflects transportation geography. The Green and Red Lines
+        don't run as frequently after midnight, making South Side
+        neighborhoods harder to reach for nightlife crowds that
+        originated further north.</p>
       `
     },
 
     // ── 11 ─────────────────────────────────────────────────────────────────
     {
-      title: "Sunday — The Slowest Day",
-      time: { day: 6, hour: 14 },
+      title: "The Year's Biggest Moments (Filtered Out)",
+      time: { day: 5, hour: 15 },
       content: `
-        <p>Sunday afternoon is Chicago's lowest-population moment of the week —
-        lower even than Saturday, lower than any weeknight.</p>
-        <div class="stat-box">
-          <span class="big-num">Sunday</span>
-          <span class="small-label">Lowest CTA ridership day of the week</span>
-        </div>
-        <p>One exception: <span class="highlight">the lakefront trail corridor</span>
-        on nice-weather Sundays sees elevated foot traffic from Edgewater down
-        to Hyde Park — but this isn't captured by the CTA rail model since
-        most of those trips are by foot or bike.</p>
-        <p>The Chicago Marathon (October Sunday) is the most dramatic single-day
-        exception — <strong style="color:#e6edf3">~45,000 runners plus 1M+ spectators</strong>
-        reshape the entire South Side population for one day each year.
-        Correctly removed as an outlier in our model.</p>
+        <p>This model shows a <em>typical</em> week. To build it, we
+        removed hundreds of days where Chicago wasn't being typical at all.</p>
+        <div class="event-tag anomaly">2023 Events removed as outliers</div>
+        <ul style="margin:10px 0 10px 16px;color:#8b949e;font-size:13px;line-height:2">
+          <li><strong style="color:#e6edf3">Lollapalooza</strong> (Aug 3–6)
+              — ~100,000/day, Grant Park. Four straight days of non-typical L ridership.</li>
+          <li><strong style="color:#e6edf3">Chicago Marathon</strong> (Oct 8)
+              — 45,000 runners + 1.7M spectators lining 26.2 miles of South Side streets</li>
+          <li><strong style="color:#e6edf3">Cubs home games</strong> (81 dates)
+              — ~40,000 per game at Wrigley, Addison Red Line becomes a crush</li>
+          <li><strong style="color:#e6edf3">White Sox games</strong>
+              — Guaranteed Rate Field, 35th-Sox-Dan Ryan stop, South Side spike</li>
+          <li><strong style="color:#e6edf3">Pride Parade</strong> (June)
+              — 1M+ along Broadway and Halsted in Boystown</li>
+          <li><strong style="color:#e6edf3">Air and Water Show</strong> (Aug)
+              — 2M over 2 days along the lakefront from Fullerton to Oak Street</li>
+        </ul>
+        <p>Each of these events creates population spikes that would
+        <span class="highlight">completely distort the "typical week"</span> signal
+        if included. They were correctly removed — but they're also the weeks
+        that make Chicago feel like Chicago.</p>
       `
     },
 
     // ── 12 ─────────────────────────────────────────────────────────────────
     {
-      title: "The Blocks That Never Sleep",
-      time: { day: 0, hour: 2 },
+      title: "O'Hare — A City at the Edge of the City",
+      time: { day: 0, hour: 7 },
       content: `
-        <p>2 AM Monday. Most of Chicago is at its quietest. But some blocks
-        barely changed since noon yesterday.</p>
-        <ul style="margin:10px 0 10px 16px;color:#8b949e;font-size:13px;line-height:2.2">
-          <li><strong style="color:#e6edf3">Northwestern Memorial Hospital</strong>
-              — Streeterville — 16,000 staff + patients</li>
-          <li><strong style="color:#e6edf3">Rush / UI Health / Jesse Brown VA</strong>
-              — Illinois Medical District</li>
-          <li><strong style="color:#e6edf3">University of Chicago</strong>
-              — Hyde Park — residential campus, always occupied</li>
-          <li><strong style="color:#e6edf3">O'Hare Blue Line terminus</strong>
-              — 24-hour airport creates constant late-night flow</li>
-          <li><strong style="color:#e6edf3">Cabrini-Green area towers</strong>
-              — High-density residential, stable population</li>
-        </ul>
-        <p>These are Chicago's <span class="highlight">structural constants</span> —
-        immune to the daily commute rhythm that governs the rest of the city.</p>
+        <p>Look at the far northwest corner — where the Blue Line ends at
+        O'Hare. That's not just a transit terminus. It's a population
+        engine that runs 24 hours a day, 365 days a year.</p>
+        <div class="stat-box">
+          <span class="big-num">68M</span>
+          <span class="small-label">Passengers through O'Hare in 2023 — 3rd busiest globally</span>
+        </div>
+        <p><span class="highlight">O'Hare is the only major American
+        airport directly connected to its city's downtown rail network</span> —
+        a 45-minute Blue Line ride from terminal to Loop, running
+        all night. Every other global hub airport requires a cab, Uber,
+        or commuter rail transfer.</p>
+        <p>The population dynamics are unique: O'Hare generates constant
+        inflow at all hours, not just peak travel times. Business travelers
+        arriving at 6 AM, connecting passengers in transit, 50,000 airport
+        employees on rotating shifts — the blocks around O'Hare never
+        fully quiet down, even at 3 AM. It's the closest thing Chicago
+        has to a truly 24-hour population anchor outside the hospitals.</p>
       `
     },
 
     // ── 13 ─────────────────────────────────────────────────────────────────
     {
-      title: "What the Model Misses",
+      title: "What This Map Cannot Tell You",
       time: { day: 0, hour: 9 },
       content: `
-        <p>Every model has limits. Here's what this one doesn't capture:</p>
+        <p>Every visualization is a perspective, not truth. Here's what
+        this one misses — and why those gaps matter for Chicago specifically.</p>
         <ul style="margin:10px 0 10px 16px;color:#8b949e;font-size:13px;line-height:2.2">
-          <li><strong style="color:#e6edf3">Bus riders</strong> — ~30% of CTA trips
-              are by bus, not rail. South and West Side neighborhoods
-              are undercounted as a result.</li>
-          <li><strong style="color:#e6edf3">Drivers</strong> — ~40% of Chicago
-              commuters drive. The expressway corridors (I-90, I-94, I-290)
-              are invisible to this model.</li>
-          <li><strong style="color:#e6edf3">Seasonal variation</strong> — Summer
-              Lakeshore crowds, winter weather drops, and tourist peaks
-              are averaged away.</li>
-          <li><strong style="color:#e6edf3">Special events</strong> — Removed
-              as outliers: correct for a typical-week model, but those
-              events tell their own story.</li>
+          <li><strong style="color:#e6edf3">The car commuter majority</strong>
+              — 40%+ of Chicagoans drive to work. The I-90, I-94, I-290
+              corridors carry hundreds of thousands invisibly. The West Side
+              is especially undercounted.</li>
+          <li><strong style="color:#e6edf3">Undocumented residents</strong>
+              — Chicago's large undocumented community (~150,000 estimated)
+              is underrepresented in the 2020 Census base population,
+              particularly in Pilsen, Little Village, and Humboldt Park.</li>
+          <li><strong style="color:#e6edf3">The lakefront in summer</strong>
+              — On a July Saturday, 2M+ people line the 26-mile lakefront.
+              Almost none arrive by L. This model shows a quiet weekend.</li>
+          <li><strong style="color:#e6edf3">Gentrification in motion</strong>
+              — Pilsen, Logan Square, and Woodlawn are changing fast.
+              The 2020 Census is already outdated for these neighborhoods.</li>
         </ul>
-        <p>The <span class="highlight">South and West Sides are likely
-        underrepresented</span> in the daytime model — their residents
-        commute heavily by bus and car, not CTA rail.</p>
+        <p>The South and West Sides commute by bus, car, and on foot —
+        <span class="highlight">their daily population export is real but
+        partially invisible here</span>. This model is most accurate for
+        the transit-rich North Side and Loop. Treat South and West Side
+        data as lower bounds, not true pictures.</p>
       `
     },
 
@@ -308,21 +387,30 @@ const Story = (() => {
       title: "Explore Chicago Yourself",
       time: { day: 0, hour: 8 },
       content: `
-        <p>You've seen Chicago's population breathe — its rhythms, contrasts,
-        anomalies, and constants.</p>
+        <p>You've seen Chicago's population breathe — its history written
+        in overnight bars, its commuter tide flooding and reversing, its
+        invisible populations and spectacular anomalies.</p>
         <div class="stat-box">
-          <span class="big-num">+500K</span>
-          <span class="small-label">People the Loop gains every workday morning</span>
+          <span class="big-num">77</span>
+          <span class="small-label">Official community areas — each with its own story</span>
         </div>
-        <p>Use the <span class="highlight">Visualization tab</span> to explore
-        freely. Toggle <strong>Change mode</strong> to see which blocks gain
-        and lose population hour by hour. Hover any block for exact numbers.</p>
-        <p>Some questions worth exploring:</p>
-        <ul style="margin:8px 0 0 16px;color:#8b949e;font-size:13px;line-height:2">
-          <li>Which South Side neighborhood exports the most workers?</li>
-          <li>Which block stays highest at 3 AM?</li>
-          <li>How does Saturday noon compare to Wednesday noon in Hyde Park?</li>
+        <p>Switch to the <span class="highlight">Visualization tab</span>
+        to explore freely. Try these:</p>
+        <ul style="margin:8px 0 0 16px;color:#8b949e;font-size:13px;line-height:2.2">
+          <li>Toggle <strong style="color:#e6edf3">Change mode</strong>
+              — which blocks gain the most daytime population? Which lose the most?</li>
+          <li>Compare <strong style="color:#e6edf3">Hyde Park at noon vs. 3 AM</strong>
+              — University of Chicago makes it one of the city's most stable blocks</li>
+          <li>Watch <strong style="color:#e6edf3">Friday vs. Wednesday at 2 PM</strong>
+              in the Loop — the remote-work effect is visible</li>
+          <li>Find the block that stays tallest at <strong style="color:#e6edf3">4 AM</strong>
+              — it's almost certainly a hospital</li>
+          <li>Compare <strong style="color:#e6edf3">Saturday vs. Sunday midday</strong>
+              — Saturday is when Chicago actually goes out</li>
         </ul>
+        <p style="margin-top:12px;font-size:12px;color:#8b949e">
+          Data: US Census 2020 · CTA Rail + Bus 2023 · LEHD Daytime Estimates · CTA GTFS
+        </p>
       `
     }
   ];
